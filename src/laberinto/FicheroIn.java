@@ -2,12 +2,9 @@
 package laberinto;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +13,7 @@ import java.util.logging.Logger;
 public class FicheroIn {
     
     public BufferedReader br;
-    private FileReader fr;
+    private final FileReader fr;
     
     public FicheroIn(String lab) throws FileNotFoundException{
         this.fr = new FileReader(lab);

@@ -18,7 +18,7 @@ import laberinto.*;
  */
 public class PanelLaberinto extends JPanel{
     
-    //constructor despues de haber elegido un fichero
+    //constructor despuess de haber elegido un fichero
     public PanelLaberinto(FicheroIn fileLab, int filas, int columnas) throws IOException{
         this.setLayout(null);
         
