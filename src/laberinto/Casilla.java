@@ -10,9 +10,9 @@ import laberinto.gui.*;
  */
 public class Casilla {
     
-    public int north; //las casillas son definidas por un codigo de 4 enteros
-    public int east;
-    public int south;
+    private int north; //las casillas son definidas por un codigo de 4 enteros
+    private int east;
+    private int south;
     public int west;
     public static int dimension = 30;
     
