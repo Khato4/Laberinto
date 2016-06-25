@@ -1,6 +1,8 @@
 
 package laberinto;
 
+import java.util.Random;
+
 /**
  *
  * @author Claudio
@@ -8,13 +10,23 @@ package laberinto;
 public class Ficha {
     
     public int posicion[] = new int [2]; //contiene la fila y la columna
-                                         //en la que se encuentra la ficha
-    
-    public Ficha(int fila, int columna){
-        this.posicion[0] = fila;
-        this.posicion[1] = columna;
+        
+        private int fila;
+        private int columna;
+        
+    public Ficha(){
+        
+        Random rnd = new Random();
+        this.fila = rnd.nextInt(Tablero.getFil());
+        this.columna = rnd.nextInt(Tablero.getCol());
     }
     
+    public int getFila(){
+        return this.fila;
+    }
     
+    public int getColumna(){
+        return this.columna;
+    }
     
 }

@@ -12,9 +12,9 @@ public class Tablero {
     public static int fil;
     public static int col;
     public static Casilla[][] tab;
-    public static int posFich[] = new int[2];
-    public static int posFin[] = new int[2];
-    
+    public static final int posFich[] = new int[2];
+    public static final int posFin[] = new int[2];
+
     public Tablero(FicheroIn fileLab, int filas, int columnas) throws IOException{
         //introducimos las dimensiones del tablero
         Tablero.fil = filas;
@@ -37,7 +37,43 @@ public class Tablero {
         }
         
         //legados a este punto solo queda la posicion de la salida
-        this.posFin[0] = Integer.parseInt(fileLab.br.readLine());
-        this.posFin[1] = Integer.parseInt(fileLab.br.readLine())-1;
+        Tablero.posFin[0] = Integer.parseInt(fileLab.br.readLine());
+        Tablero.posFin[1] = Integer.parseInt(fileLab.br.readLine())-1;
     }
+    
+        /**
+     * @return the fil
+     */
+    public static int getFil() {
+        return fil;
+    }
+
+    /**
+     * @return the col
+     */
+    public static int getCol() {
+        return col;
+    }
+
+    /**
+     * @return the posFich
+     */
+    public static int[] getPosFich() {
+        return posFich;
+    }
+
+    /**
+     * @return the posFin
+     */
+    public static int[] getPosFin() {
+        return posFin;
+    }
+    
+        /**
+     * @return the tab
+     */
+    public static Casilla[][] getTab() {
+        return tab;
+    }
+    
 }

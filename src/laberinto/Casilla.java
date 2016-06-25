@@ -13,7 +13,7 @@ public class Casilla {
     private int north; //las casillas son definidas por un codigo de 4 enteros
     private int east;
     private int south;
-    public int west;
+    private int west;
     public static int dimension = 30;
     
     public Casilla(int north, int east, int south, int west){

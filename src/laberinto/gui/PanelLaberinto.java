@@ -22,6 +22,10 @@ public class PanelLaberinto extends JPanel{
     public PanelLaberinto(FicheroIn fileLab, int filas, int columnas) throws IOException{
         this.setLayout(null);
         
+        Tablero tablero = new Tablero();
+        Ficha ficha = new Ficha();
+        
+        repaint();
         
     }
 
@@ -29,6 +33,11 @@ public class PanelLaberinto extends JPanel{
         @Override
         public void paint(Graphics g){
             Graphics2D g2 = (Graphics2D) g;
+            
+            tablero.draw(g);
+            ficha.draw(g);
+            
+            
             g2.setStroke(new BasicStroke(5));
             
             BufferedImage img = null;
@@ -37,6 +46,9 @@ public class PanelLaberinto extends JPanel{
             } catch (IOException e) {
             }
             g2.drawImage(img, (Tablero.posFin[1]) * Casilla.dimension, 
+                    (Tablero.posFin[0])* Casilla.dimension, 30, 30, null);
+            
+            g2.drawImage(img, (ficha.getFila())) * Casilla.dimension, 
                     (Tablero.posFin[0])* Casilla.dimension, 30, 30, null);
             
             for(int i = 0; i < Tablero.fil; i++){
