@@ -13,6 +13,8 @@ public class KeyManager {
     
     private static char key;
     
-    public KeyManager
+    public KeyManager(){
+        
+    }
     
 }

@@ -18,12 +18,13 @@ import laberinto.*;
  */
 public class PanelLaberinto extends JPanel{
     
-    //constructor despuess de haber elegido un fichero
+    Ficha ficha = new Ficha();
+    //constructor despues de haber elegido un fichero
     public PanelLaberinto(FicheroIn fileLab, int filas, int columnas) throws IOException{
         this.setLayout(null);
         
-        Tablero tablero = new Tablero();
-        Ficha ficha = new Ficha();
+//        Tablero tablero = new Tablero();
+        
         
         repaint();
         
@@ -34,7 +35,7 @@ public class PanelLaberinto extends JPanel{
         public void paint(Graphics g){
             Graphics2D g2 = (Graphics2D) g;
             
-            tablero.draw(g);
+//            tablero.draw(g);
             ficha.draw(g);
             
             
@@ -47,9 +48,16 @@ public class PanelLaberinto extends JPanel{
             }
             g2.drawImage(img, (Tablero.posFin[1]) * Casilla.dimension, 
                     (Tablero.posFin[0])* Casilla.dimension, 30, 30, null);
+            System.out.println("exit");
             
-            g2.drawImage(img, (ficha.getFila())) * Casilla.dimension, 
-                    (Tablero.posFin[0])* Casilla.dimension, 30, 30, null);
+//            try {
+//                img = ImageIO.read(new File("ficha.png"));
+//            } catch (IOException e) {
+//            }
+//            g2.drawImage(img, (ficha.getColumna()) * Casilla.dimension, 
+//                    (ficha.getFila())* Casilla.dimension, 30, 30, null);
+//            
+//            System.out.println("ficha: "+ficha.getFila()+"    "+ficha.getColumna());
             
             for(int i = 0; i < Tablero.fil; i++){
                 for(int j =0; j < Tablero.col; j++){

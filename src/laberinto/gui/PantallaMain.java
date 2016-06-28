@@ -28,8 +28,8 @@ public class PantallaMain extends JFrame {
         PantallaMain.height = filCol[0] * 30 + 60;
         PantallaMain.width = filCol[1] * 30 + 7;
         
-        System.out.println(PantallaMain.height);
-        System.out.println(PantallaMain.width);
+//        System.out.println(PantallaMain.height);
+//        System.out.println(PantallaMain.width);
         
         this.setSize(width, height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -86,7 +86,6 @@ public class PantallaMain extends JFrame {
                 
             }
             }));
-        
         
         
         menu.add(abrir);
