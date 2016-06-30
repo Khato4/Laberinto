@@ -3,6 +3,7 @@ package laberinto.gui;
 
 import static java.awt.Color.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,15 +22,14 @@ public class PantallaMain extends JFrame {
     public static int height;
     public static int width;
     
-    public PantallaMain(FicheroIn fileLab) throws IOException{
+    //el constructor recibe el fichero por parametro para definir el tamaño de la ventana
+    public PantallaMain(File fileLab) throws IOException{
         
+        FicheroIn fichero = new FicheroIn(fileLab.getAbsolutePath());
         //leemos del fichero el numero de filas y columnas para especificar el tamaño
-        int[] filCol = fileLab.getFilasColumnas();
+        int[] filCol = fichero.getFilasColumnas();
         PantallaMain.height = filCol[0] * 30 + 60;
         PantallaMain.width = filCol[1] * 30 + 7;
-        
-//        System.out.println(PantallaMain.height);
-//        System.out.println(PantallaMain.width);
         
         this.setSize(width, height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class PantallaMain extends JFrame {
         this.setResizable(false);
         
         //creamos la estructura de datos de tablero y llenamos
-        Tablero tab = new Tablero(fileLab, filCol[0], filCol[1]);
+        Tablero tab = new Tablero(fileLab);
         
         
         //barra del menu
@@ -49,17 +49,17 @@ public class PantallaMain extends JFrame {
         this.setVisible(true);
         this.add(barraMenu);
         
+        //panel donde se dibujara el laberinto
+        PanelLaberinto panLab = new PanelLaberinto(fileLab);
+        panLab.setBounds(0, 30, width, height-30);
+        panLab.setVisible(true);
+        this.add(panLab);
+        
         //menu
         JMenu menu = new JMenu("Fichero");
         menu.setForeground(WHITE);
         menu.setVisible(true);
         barraMenu.add(menu);
-       
-        //panel donde se dibujara el laberinto
-        PanelLaberinto panLab = new PanelLaberinto(fileLab, filCol[0], filCol[1]);
-        panLab.setBounds(0, 30, width, height-30);
-        panLab.setVisible(true);
-        this.add(panLab);
         
         //botones
         //1er boton, seleccionar fichero laberinto

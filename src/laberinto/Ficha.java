@@ -14,16 +14,18 @@ import javax.imageio.ImageIO;
  */
 public class Ficha {
     
-    public int posicion[] = new int [2]; //contiene la fila y la columna
-        
-        private int fila;
-        private int columna;
+    private int fila;
+    private int columna;
+    private static int filaInicial;
+    private static int columnaInicial;
         
     public Ficha(){
         
         Random rnd = new Random();
         this.fila = rnd.nextInt(Tablero.getFil());
         this.columna = rnd.nextInt(Tablero.getCol());
+        Ficha.filaInicial = this.fila;
+        Ficha.columnaInicial = this.columna;
     }
     
     public int getFila(){
@@ -34,8 +36,23 @@ public class Ficha {
         return this.columna;
     }
     
+    public void setFila(int x){
+        this.fila = x;
+    }
     
-    public void draw(Graphics g){
+    public void setColumna(int y){
+        this.columna = y;
+    }
+    
+    public int getFilaInicial(){
+        return Ficha.filaInicial;
+    }
+    
+    public int getColumnaInicial(){
+        return Ficha.columnaInicial;
+    }
+    
+    public void paintComponent(Graphics g){
         BufferedImage img = null;
         try {
                 img = ImageIO.read(new File("ficha.png"));

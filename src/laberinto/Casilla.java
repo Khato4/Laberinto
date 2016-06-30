@@ -1,19 +1,16 @@
 
 package laberinto;
 
-import laberinto.gui.*;
-
-
 /**
  *
  * @author Claudio
  */
 public class Casilla {
     
-    private int north; //las casillas son definidas por un codigo de 4 enteros
-    private int east;
-    private int south;
-    private int west;
+    private final int north; //las casillas son definidas por un codigo de 4 enteros
+    private final int east;
+    private final int south;
+    private final int west;
     public static int dimension = 30;
     
     public Casilla(int north, int east, int south, int west){

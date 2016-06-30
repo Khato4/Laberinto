@@ -1,14 +1,12 @@
 
 package laberinto.gui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.util.Arrays;
 import javax.swing.*;
 import laberinto.*;
 
@@ -16,79 +14,103 @@ import laberinto.*;
  *
  * @author Claudio Sugar
  */
-public class PanelLaberinto extends JPanel{
+public class PanelLaberinto extends JPanel implements KeyListener {
     
-    Ficha ficha = new Ficha();
+        private Tablero tablero;
+        private Ficha ficha;
+    
+    
     //constructor despues de haber elegido un fichero
-    public PanelLaberinto(FicheroIn fileLab, int filas, int columnas) throws IOException{
+    public PanelLaberinto(File fileLab) throws IOException{
         this.setLayout(null);
-        
-//        Tablero tablero = new Tablero();
-        
-        
-        repaint();
-        
+        this.tablero = new Tablero(fileLab);
+        this.ficha = new Ficha();
+        addKeyListener(this);
+        this.setFocusable(true);
+    }
+    
+    
+    
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        System.out.println(ke.getKeyText(ke.getKeyCode()));
+    }
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        System.out.println(ke.getKeyText(ke.getKeyCode()));
     }
 
-    
-        @Override
-        public void paint(Graphics g){
-            Graphics2D g2 = (Graphics2D) g;
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        System.out.println(ke.getKeyText(ke.getKeyCode()));
+        switch(KeyEvent.getKeyText(ke.getKeyCode())){
+                case "W":
+                    if(tablero.tab[ficha.getFila()][ficha.getColumna()].getNorth()){
+                        break;
+                     }
+                     ficha.setFila(ficha.getFila()-1);
+                     System.out.println(ficha.getFila());
+                     System.out.println("AAA");
+                     repaint();
+                     break;
+                     
+                case "D":
+                    if(tablero.tab[ficha.getFila()][ficha.getColumna()].getEast()){
+                        break;
+                     }
+                     ficha.setColumna(ficha.getColumna()+1);
+                     System.out.println(ficha.getFila());
+                     System.out.println("AAA");
+                     repaint();
+                     break;
+                     
+                 case "S":
+                     if(tablero.tab[ficha.getFila()][ficha.getColumna()].getSouth()){
+                         break;
+                     }
+                     ficha.setFila(ficha.getFila()+1);
+                     System.out.println(ficha.getFila());
+                     System.out.println("AAA");
+                     repaint();
+                     break;
+                     
+                 case "A":
+                     if(tablero.tab[ficha.getFila()][ficha.getColumna()].getWest()){
+                         break;
+                     }
+                     ficha.setColumna(ficha.getColumna()-1);
+                     System.out.println(ficha.getFila());
+                     System.out.println("AAA");
+                     repaint();
+                     break;
+                     
+        }
+        System.out.println("pos: ["+ficha.getFila()+","+ficha.getColumna()+"]");
+        System.out.println("exit: ["+Arrays.toString(tablero.posFin));
+        
+        if(ficha.getFila() == tablero.posFin[0] && ficha.getColumna() == tablero.posFin[1]){
+            JOptionPane optionPane = new JOptionPane(new JLabel("¡Has ganado!",JLabel.CENTER));
+            JDialog dialog = optionPane.createDialog("");
+            dialog.setModal(true);
+            dialog.setVisible(true);
             
-//            tablero.draw(g);
-            ficha.draw(g);
+            ficha.setFila(ficha.getFilaInicial());
+            ficha.setColumna(ficha.getColumnaInicial());
             
-            
-            g2.setStroke(new BasicStroke(5));
-            
-            BufferedImage img = null;
-            try {
-                img = ImageIO.read(new File("exit.png"));
-            } catch (IOException e) {
-            }
-            g2.drawImage(img, (Tablero.posFin[1]) * Casilla.dimension, 
-                    (Tablero.posFin[0])* Casilla.dimension, 30, 30, null);
-            System.out.println("exit");
-            
-//            try {
-//                img = ImageIO.read(new File("ficha.png"));
-//            } catch (IOException e) {
-//            }
-//            g2.drawImage(img, (ficha.getColumna()) * Casilla.dimension, 
-//                    (ficha.getFila())* Casilla.dimension, 30, 30, null);
-//            
-//            System.out.println("ficha: "+ficha.getFila()+"    "+ficha.getColumna());
-            
-            for(int i = 0; i < Tablero.fil; i++){
-                for(int j =0; j < Tablero.col; j++){
-                    if(Tablero.tab[i][j].getNorth()){
-                        g2.setColor (Color.black);
-                        g2.drawLine(Casilla.dimension * j, 
-                                Casilla.dimension * i,
-                                Casilla.dimension * j + Casilla.dimension,
-                                Casilla.dimension * i);
-                    }
-                    if(Tablero.tab[i][j].getEast()){
-                        g2.drawLine(Casilla.dimension * j + Casilla.dimension, 
-                                Casilla.dimension * i,
-                                Casilla.dimension * j + Casilla.dimension,
-                                Casilla.dimension * i + Casilla.dimension);
-                    }
-                    if(Tablero.tab[i][j].getSouth()){
-                        g2.drawLine(Casilla.dimension * j, 
-                                Casilla.dimension * i + Casilla.dimension,
-                                Casilla.dimension * j + Casilla.dimension,
-                                Casilla.dimension * i + Casilla.dimension);
-                    }
-                    if(Tablero.tab[i][j].getWest()){
-                        g2.drawLine(Casilla.dimension * j, 
-                                Casilla.dimension * i,
-                                Casilla.dimension * j,
-                                Casilla.dimension * i + Casilla.dimension);
-                    }
-                }
-            }
-            
+            repaint();
         }
     }
+    
+    @Override
+         protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            tablero.paintComponent(g);
+            ficha.paintComponent(g);
+            
+         }
+         
+    
+
+}
 
