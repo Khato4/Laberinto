@@ -1,4 +1,3 @@
-
 package laberinto;
 
 import java.awt.Graphics;
@@ -12,63 +11,71 @@ import javax.imageio.ImageIO;
  *
  * @author Claudio
  */
-public class Ficha {
-    
+//Ficha es un objeto que será único, consta de su posición actual y de una 
+//constante que almacena su posición inicial creada aleatoriamente para el reinicio
+//de su posición
+public final class Ficha {
+
     private int fila;
     private int columna;
     private static int filaInicial;
     private static int columnaInicial;
-        
-    public Ficha(){
-        
-        Random rnd = new Random();
+    
+    //un Random entre 0 y el numero de filas y columnas inicia la posicion 
+    //inicial de la ficha
+    public Ficha() {
+        Random rnd = new Random();          
         this.fila = rnd.nextInt(Tablero.getFil());
         this.columna = rnd.nextInt(Tablero.getCol());
         Ficha.filaInicial = this.fila;
         Ficha.columnaInicial = this.columna;
+
+        System.out.println("Ficha creada en: [" + this.getFila() + ", " + this.getColumna() + "]");
     }
     
-    public void resetPosicion(){
+    //este método reinicia la posicion de la ficha
+    public void resetPosicion() {
         this.setFila(this.getFilaInicial());
         this.setColumna(this.getColumnaInicial());
-        
+
+        System.out.println("Reinicio posición ficha.");
     }
     
-    public int getFila(){
+    //getters y setters para los atributos privados
+    public int getFila() {
         return this.fila;
     }
-    
-    public int getColumna(){
+
+    public int getColumna() {
         return this.columna;
     }
-    
-    public void setFila(int x){
+
+    public void setFila(int x) {
         this.fila = x;
     }
-    
-    public void setColumna(int y){
+
+    public void setColumna(int y) {
         this.columna = y;
     }
-    
-    public int getFilaInicial(){
+
+    public int getFilaInicial() {
         return Ficha.filaInicial;
     }
-    
-    public int getColumnaInicial(){
+
+    public int getColumnaInicial() {
         return Ficha.columnaInicial;
     }
     
-    public void paintComponent(Graphics g){
+    //función que pinta la ficha segun su posición actual
+    public void paintComponent(Graphics g) {
         BufferedImage img = null;
         try {
-                img = ImageIO.read(new File("ficha.png"));
-            } catch (IOException e) {
-            }
-            g.drawImage(img, (this.getColumna()) * Casilla.dimension, 
-                    (this.getFila())* Casilla.dimension, 30, 30, null);
-            
-            System.out.println("ficha: "+this.getFila()+"    "+this.getColumna());
-        
+            img = ImageIO.read(new File("ficha.png"));
+        } catch (IOException e) {
+        }
+        g.drawImage(img, (this.getColumna()) * Casilla.dimension,
+                (this.getFila()) * Casilla.dimension, 30, 30, null);
+
     }
-    
+
 }

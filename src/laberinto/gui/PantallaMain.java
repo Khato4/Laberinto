@@ -1,4 +1,3 @@
-
 package laberinto.gui;
 
 import static java.awt.Color.*;
@@ -15,55 +14,55 @@ import laberinto.*;
  *
  * @author Claudio Sugar
  */
-
-//clase que crea la ventana inicial y nos permite seleccionar fichero
+//clase que crea la ventana inicial, el menú, y gestiona la funcionalidad de
+//las opciones, además de llamar al constructor del PanelLaberinto
 public class PantallaMain extends JFrame {
-    
+
     public static int height;
     public static int width;
-    
+
     //el constructor recibe el fichero por parametro para definir el tamaño de la ventana
-    public PantallaMain(File fileLab) throws IOException{
-        
+    public PantallaMain(File fileLab) throws IOException {
+
         FicheroIn fichero = new FicheroIn(fileLab.getAbsolutePath());
         //leemos del fichero el numero de filas y columnas para especificar el tamaño
         int[] filCol = fichero.getFilasColumnas();
         PantallaMain.height = filCol[0] * 30 + 60;
         PantallaMain.width = filCol[1] * 30 + 7;
-        
+
         this.setSize(width, height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setResizable(false);
-        
+
         //creamos la estructura de datos de tablero y llenamos
         Tablero tab = new Tablero(fileLab);
-        
-        
-        //barra del menu
+
+        //creamos la barra del menu
         JMenuBar barraMenu = new JMenuBar();
-        barraMenu.setBounds(0,0,width,30);
+        barraMenu.setBounds(0, 0, width, 30);
         barraMenu.setBackground(DARK_GRAY);
         barraMenu.setVisible(true);
         this.setVisible(true);
         this.add(barraMenu);
-        
-        //panel donde se dibujara el laberinto
+
+        //creamos el panel donde se dibujara el laberinto
         PanelLaberinto panLab = new PanelLaberinto(fileLab);
-        panLab.setBounds(0, 30, width, height-30);
+        panLab.setBounds(0, 30, width, height - 30);
         panLab.setVisible(true);
         this.add(panLab);
-        panLab.requestFocus();
-        
-        //menu
+        panLab.requestFocus();  //pedimos el focus del Listener para el correcto
+                                //funcionamiento del KeyListener
+
+        //creamos el menú
         JMenu menu = new JMenu("Fichero");
         menu.setForeground(WHITE);
         menu.setVisible(true);
         barraMenu.add(menu);
-        
-        //botones
-        //1er boton, seleccionar fichero laberinto
+
+        //selecciones
+        //1era selección, seleccionar fichero laberinto
         JMenuItem abrir = new JMenuItem("Abrir Laberinto");
         JFileChooser select = new JFileChooser();
         abrir.addActionListener((new ActionListener() {
@@ -73,9 +72,10 @@ public class PantallaMain extends JFrame {
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     //guardamos el fichero laberinto seleccionado en labFile
                     File labFile = (select.getSelectedFile());
-                    
-                    //cerramos el actual laberinto y creamos el nuevo
+
+                    //cerramos el actual laberinto
                     cerrarVentana();
+                    //y creamos el nuevo
                     try {
                         PantallaMain nueva = new PantallaMain(labFile);
                     } catch (IOException ex) {
@@ -84,26 +84,31 @@ public class PantallaMain extends JFrame {
                 }
             }
         }));
-        
-        
         menu.add(abrir);
+        
+        //2a selección, reinicio de posición de la ficha
         JMenuItem reinit = new JMenuItem("Reiniciar Posición");
-        reinit.addActionListener(((ActionEvent ae)->{
-            panLab.ficha.resetPosicion();
+        reinit.addActionListener(((ActionEvent ae) -> {
+            panLab.getFicha().resetPosicion();
             panLab.repaint();
         }));
         menu.add(reinit);
+        
+        //3a selección, salida del programa
         JMenuItem salir = new JMenuItem("Salir");
-        salir.addActionListener((ActionEvent ae)->{
-           System.exit(0); 
+        salir.addActionListener((ActionEvent ae) -> {
+            System.exit(0);
         });
         menu.add(salir);
-        
+
         this.setVisible(true);
+
+        System.out.println("Interfaz gráfica creada, fichero: " + fileLab.getName());
     }
     
-    public void cerrarVentana(){
+    //método que cierra el PantallaMain actual sin salir del programa
+    public void cerrarVentana() {
         this.dispose();
     }
-    
+
 }
