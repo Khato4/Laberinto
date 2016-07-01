@@ -17,7 +17,7 @@ public class Laberinto {
 
         File laberinto = new File("maze1.txt");
         PantallaMain inicio = new PantallaMain(laberinto);
-        
+
     }
 
 }

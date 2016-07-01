@@ -53,7 +53,7 @@ public class PantallaMain extends JFrame {
         panLab.setVisible(true);
         this.add(panLab);
         panLab.requestFocus();  //pedimos el focus del Listener para el correcto
-                                //funcionamiento del KeyListener
+        //funcionamiento del KeyListener
 
         //creamos el menú
         JMenu menu = new JMenu("Fichero");
@@ -85,7 +85,7 @@ public class PantallaMain extends JFrame {
             }
         }));
         menu.add(abrir);
-        
+
         //2a selección, reinicio de posición de la ficha
         JMenuItem reinit = new JMenuItem("Reiniciar Posición");
         reinit.addActionListener(((ActionEvent ae) -> {
@@ -93,7 +93,7 @@ public class PantallaMain extends JFrame {
             panLab.repaint();
         }));
         menu.add(reinit);
-        
+
         //3a selección, salida del programa
         JMenuItem salir = new JMenuItem("Salir");
         salir.addActionListener((ActionEvent ae) -> {
@@ -105,7 +105,7 @@ public class PantallaMain extends JFrame {
 
         System.out.println("Interfaz gráfica creada, fichero: " + fileLab.getName());
     }
-    
+
     //método que cierra el PantallaMain actual sin salir del programa
     public void cerrarVentana() {
         this.dispose();

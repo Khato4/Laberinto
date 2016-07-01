@@ -20,11 +20,11 @@ public final class Ficha {
     private int columna;
     private static int filaInicial;
     private static int columnaInicial;
-    
+
     //un Random entre 0 y el numero de filas y columnas inicia la posicion 
     //inicial de la ficha
     public Ficha() {
-        Random rnd = new Random();          
+        Random rnd = new Random();
         this.fila = rnd.nextInt(Tablero.getFil());
         this.columna = rnd.nextInt(Tablero.getCol());
         Ficha.filaInicial = this.fila;
@@ -32,7 +32,7 @@ public final class Ficha {
 
         System.out.println("Ficha creada en: [" + this.getFila() + ", " + this.getColumna() + "]");
     }
-    
+
     //este método reinicia la posicion de la ficha
     public void resetPosicion() {
         this.setFila(this.getFilaInicial());
@@ -40,7 +40,7 @@ public final class Ficha {
 
         System.out.println("Reinicio posición ficha.");
     }
-    
+
     //getters y setters para los atributos privados
     public int getFila() {
         return this.fila;
@@ -65,7 +65,7 @@ public final class Ficha {
     public int getColumnaInicial() {
         return Ficha.columnaInicial;
     }
-    
+
     //función que pinta la ficha segun su posición actual
     public void paintComponent(Graphics g) {
         BufferedImage img = null;

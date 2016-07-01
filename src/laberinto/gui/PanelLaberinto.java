@@ -24,6 +24,7 @@ import laberinto.*;
 //como la ficha. Además implementa KeyListener y por tanto gestiona la 
 //interacción del teclado con nuestro juego
 public class PanelLaberinto extends JPanel implements KeyListener {
+
     //contiene un objeto tablero y otro objeto ficha
     private final Tablero tablero;
     private final Ficha ficha;
@@ -35,7 +36,7 @@ public class PanelLaberinto extends JPanel implements KeyListener {
         this.tablero = new Tablero(fileLab);
         System.out.println("Tablero creado.");
         this.ficha = new Ficha();
-        
+
         addKeyListener(this);
         //setFocusable es necesario para que el KeyListener se fije en el JPanel
         //y responda al teclado
@@ -50,7 +51,7 @@ public class PanelLaberinto extends JPanel implements KeyListener {
     public Ficha getFicha() {
         return this.ficha;
     }
-    
+
     //método que dibujará tanto el tablero como la ficha, llamando a sus
     //respectivos métodos
     @Override
@@ -60,7 +61,7 @@ public class PanelLaberinto extends JPanel implements KeyListener {
         ficha.paintComponent(g);
 
     }
-    
+
     //gestión del teclado
     @Override
     public void keyTyped(KeyEvent ke) {
@@ -69,7 +70,7 @@ public class PanelLaberinto extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent ke) {
     }
-    
+
     //únicamente hacemos uso de pulsar una tecla. Este método modificará la 
     //posición de la ficha si obtiene false de su booleano get (no hay pared),
     //y repintará tras la modificación.
@@ -123,8 +124,8 @@ public class PanelLaberinto extends JPanel implements KeyListener {
 
         }
         System.out.println("Ficha en: [" + ficha.getFila() + ", " + ficha.getColumna() + "]");
-        System.out.println("Exit en: " + Arrays.toString(tablero.posFin)+"\n");
-        
+        System.out.println("Exit en: " + Arrays.toString(tablero.posFin) + "\n");
+
         //comprobamos si la ficha ha llegado a exit
         if (ficha.getFila() == tablero.posFin[0] && ficha.getColumna() == tablero.posFin[1]) {
             sonido(win);    //sonido victoria

@@ -46,6 +46,8 @@ public class Tablero {
         //llegados a este punto solo queda guardar la posicion de la salida
         this.posFin[0] = Integer.parseInt(fichero.br.readLine());
         this.posFin[1] = Integer.parseInt(fichero.br.readLine()) - 1;
+        
+//        System.out.println(this.toString()); //comprobación de datos por consola
 
     }
 
@@ -107,7 +109,25 @@ public class Tablero {
                 }
             }
         }
-
+        
     }
+    
+    //método para la comprobación de los datos en la matriz
+    @Override
+    public String toString(){
+        String s = "";
+        for(int i = 0; i < Tablero.getFil(); i++){
+            for(int j = 0; j < Tablero.getCol(); j++){
+                s += ("Casilla["+i+"]["+j+"]: ["+this.tab[i][j].getNorth()
+                        +this.tab[i][j].getEast()
+                        +this.tab[i][j].getSouth()
+                        +this.tab[i][j].getWest()+"]");
+            }
+            s += "\n";
+        }
+        return s;
+    }
+    
+    
 
 }

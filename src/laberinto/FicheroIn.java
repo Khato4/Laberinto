@@ -30,7 +30,7 @@ public class FicheroIn {
 
         return filCol;
     }
-    
+
     //método para la lectura de cada uno de los bits que definen cada Casilla
     public int getBit() throws IOException {
         int bit = br.read() - 48; //convertimos a entero
