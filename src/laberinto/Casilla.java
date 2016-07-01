@@ -7,7 +7,7 @@ package laberinto;
  */
 public class Casilla {
     
-    private final int north; //las casillas son definidas por un codigo de 4 enteros
+    private final int north;
     private final int east;
     private final int south;
     private final int west;

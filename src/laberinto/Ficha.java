@@ -28,6 +28,12 @@ public class Ficha {
         Ficha.columnaInicial = this.columna;
     }
     
+    public void resetPosicion(){
+        this.setFila(this.getFilaInicial());
+        this.setColumna(this.getColumnaInicial());
+        
+    }
+    
     public int getFila(){
         return this.fila;
     }
