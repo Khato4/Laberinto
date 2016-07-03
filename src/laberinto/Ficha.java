@@ -72,6 +72,7 @@ public final class Ficha {
         try {
             img = ImageIO.read(new File("ficha.png"));
         } catch (IOException e) {
+            System.out.println("¡Error: no se pudo cargar la imagen de ficha!");
         }
         g.drawImage(img, (this.getColumna()) * Casilla.dimension,
                 (this.getFila()) * Casilla.dimension, 30, 30, null);

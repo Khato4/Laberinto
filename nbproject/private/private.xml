@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/Tablero.java</file>
+            <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/Casilla.java</file>
             <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/Laberinto.java</file>
             <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/gui/PanelLaberinto.java</file>
+            <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/Ficha.java</file>
             <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/gui/PantallaMain.java</file>
             <file>file:/C:/Users/Khato/Documents/NetBeansProjects/Laberinto/src/laberinto/FicheroIn.java</file>
         </group>

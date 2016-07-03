@@ -4,9 +4,7 @@ import static java.awt.Color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.FileNotFoundException;
 import javax.swing.*;
 import laberinto.*;
 
@@ -22,9 +20,14 @@ public class PantallaMain extends JFrame {
     public static int width;
 
     //el constructor recibe el fichero por parametro para definir el tamaño de la ventana
-    public PantallaMain(File fileLab) throws IOException {
+    public PantallaMain(File fileLab){
 
-        FicheroIn fichero = new FicheroIn(fileLab.getAbsolutePath());
+        FicheroIn fichero = null;
+        try {
+            fichero = new FicheroIn(fileLab.getAbsolutePath());
+        } catch (FileNotFoundException ex) {
+            System.out.println("¡Error: no se encuentra el fichero!");
+        }
         //leemos del fichero el numero de filas y columnas para especificar el tamaño
         int[] filCol = fichero.getFilasColumnas();
         PantallaMain.height = filCol[0] * 30 + 60;
@@ -75,12 +78,7 @@ public class PantallaMain extends JFrame {
 
                     //cerramos el actual laberinto
                     cerrarVentana();
-                    //y creamos el nuevo
-                    try {
-                        PantallaMain nueva = new PantallaMain(labFile);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PantallaMain.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    PantallaMain nueva = new PantallaMain(labFile);
                 }
             }
         }));

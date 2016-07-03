@@ -6,7 +6,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -16,16 +19,21 @@ import javax.imageio.ImageIO;
 /*Esta clase corresponde a la clase "Laberinto" de la especificación de la
   práctica, es la estructura de datos del Laberinto comprendido como una matriz
   de objetos Casilla
-*/
+ */
 public class Tablero {
-    
+
     private static int fil;             //número de filas
     private static int col;             //número de columnas
     public Casilla[][] tab;             //matriz 2 dimensiones de Casillas
     public int posFin[] = new int[2];   //posición de la salida
 
-    public Tablero(File fileLab) throws IOException {
-        FicheroIn fichero = new FicheroIn(fileLab.getAbsolutePath());
+    public Tablero(File fileLab) {
+        FicheroIn fichero = null;
+        try {
+            fichero = new FicheroIn(fileLab.getAbsolutePath());
+        } catch (FileNotFoundException ex) {
+            System.out.println("¡Error: no se encuentra el fichero!");
+        }
         int[] filCol = fichero.getFilasColumnas();
         //introducimos las dimensiones del tablero
         Tablero.fil = filCol[0];
@@ -44,10 +52,13 @@ public class Tablero {
         }
 
         //llegados a este punto solo queda guardar la posicion de la salida
-        this.posFin[0] = Integer.parseInt(fichero.br.readLine());
-        this.posFin[1] = Integer.parseInt(fichero.br.readLine()) - 1;
-        
+        try {
+            this.posFin[0] = Integer.parseInt(fichero.br.readLine());
+            this.posFin[1] = Integer.parseInt(fichero.br.readLine()) - 1;
 //        System.out.println(this.toString()); //comprobación de datos por consola
+        } catch (IOException ex) {
+            System.out.println("¡Error en la lectura de la posición de la salida");
+        }
 
     }
 
@@ -56,26 +67,26 @@ public class Tablero {
         return Tablero.fil;
     }
 
-    
     public static int getCol() {
         return Tablero.col;
     }
-    
+
     //función de dibujo del tablero
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(5));
-        
+
         //obtenemos la imagen que colocaremos en la posición de salida
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("exit.png"));
         } catch (IOException e) {
+            System.out.println("¡Error: no se pudo cargar la imagen de salida!");
         }
         //y la dibujamos
         g2.drawImage(img, (this.posFin[1]) * Casilla.dimension,
                 (this.posFin[0]) * Casilla.dimension, 30, 30, null);
-        
+
         //bucle de dibujo, recorremos la matriz de Casillas de derecha a izquierda
         //y de arriba a abajo. Para cada Casilla realizamos un get de cada una 
         //de sus 4 posibles paredes, y si retornan true, las dibujamos en su 
@@ -109,25 +120,23 @@ public class Tablero {
                 }
             }
         }
-        
+
     }
-    
+
     //método para la comprobación de los datos en la matriz
     @Override
-    public String toString(){
+    public String toString() {
         String s = "";
-        for(int i = 0; i < Tablero.getFil(); i++){
-            for(int j = 0; j < Tablero.getCol(); j++){
-                s += ("Casilla["+i+"]["+j+"]: ["+this.tab[i][j].getNorth()
-                        +this.tab[i][j].getEast()
-                        +this.tab[i][j].getSouth()
-                        +this.tab[i][j].getWest()+"]");
+        for (int i = 0; i < Tablero.getFil(); i++) {
+            for (int j = 0; j < Tablero.getCol(); j++) {
+                s += ("Casilla[" + i + "][" + j + "]: [" + this.tab[i][j].getNorth()
+                        + this.tab[i][j].getEast()
+                        + this.tab[i][j].getSouth()
+                        + this.tab[i][j].getWest() + "]");
             }
             s += "\n";
         }
         return s;
     }
-    
-    
 
 }

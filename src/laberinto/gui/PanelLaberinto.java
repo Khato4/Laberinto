@@ -6,8 +6,6 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -31,12 +29,13 @@ public class PanelLaberinto extends JPanel implements KeyListener {
 
     //constructor despues de haber seleccionado un fichero, crea un tablero 
     //y una ficha, ademas de añadir el Listener del teclado
-    public PanelLaberinto(File fileLab) throws IOException {
+    public PanelLaberinto(File fileLab){
         this.setLayout(null);
         this.tablero = new Tablero(fileLab);
         System.out.println("Tablero creado.");
         this.ficha = new Ficha();
-
+        
+        //añadimos el teclado
         addKeyListener(this);
         //setFocusable es necesario para que el KeyListener se fije en el JPanel
         //y responda al teclado
@@ -151,12 +150,12 @@ public class PanelLaberinto extends JPanel implements KeyListener {
             clip.open(audioInputStream);
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-            Logger.getLogger(PanelLaberinto.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("¡Error en la reproducción de sonido!");
         } finally {
             try {
                 audioInputStream.close();
             } catch (IOException ex) {
-                Logger.getLogger(PanelLaberinto.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("¡Error al cerrar archivo de sonido!");
             }
         }
     }
